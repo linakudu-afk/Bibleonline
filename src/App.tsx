@@ -177,13 +177,17 @@ function VideoSection() {
       <div className="flex items-center justify-center gap-4 md:gap-5 flex-wrap md:flex-nowrap">
         <button
           onClick={goToPrevious}
-          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-[2rem] bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3 shrink-0 text-[#4169E1] group"
+          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3 shrink-0 group overflow-hidden"
           style={{
             boxShadow: '0 10px 40px rgba(65, 105, 225, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1)',
           }}
           aria-label="Предыдущий слайд"
         >
-          <span className="transition-transform duration-300 group-hover:-translate-x-1">◀</span>
+          <img 
+            src="https://image.qwenlm.ai/generated-images/d142a80f-2e1d-4e7c-a474-29ed8c7c8aba/_result.png" 
+            alt="Предыдущий" 
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:-translate-x-1"
+          />
         </button>
 
         <div className="relative w-full max-w-[720px]">
@@ -204,13 +208,17 @@ function VideoSection() {
 
         <button
           onClick={goToNext}
-          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-[2rem] bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-rotate-3 shrink-0 text-[#4169E1] group"
+          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-rotate-3 shrink-0 group overflow-hidden"
           style={{
             boxShadow: '0 10px 40px rgba(65, 105, 225, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1)',
           }}
           aria-label="Следующий слайд"
         >
-          <span className="transition-transform duration-300 group-hover:translate-x-1">▶</span>
+          <img 
+            src="https://image.qwenlm.ai/generated-images/d84cbf6b-a08e-42b0-90fa-84a389c6277f/_result.png" 
+            alt="Следующий" 
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:translate-x-1"
+          />
         </button>
       </div>
     </div>
