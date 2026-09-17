@@ -176,6 +176,251 @@ function MaterialsSection() {
   )
 }
 
+// Онлайн-тест
+function OnlineTest() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [answers, setAnswers] = useState<Record<number, number>>({})
+  const [submitted, setSubmitted] = useState(false)
+
+  const questions = [
+    {
+      question: 'Сколько дней Бог творил мир?',
+      options: ['5 дней', '6 дней', '7 дней', '10 дней'],
+      correct: 1,
+    },
+    {
+      question: 'Что Бог создал в первый день?',
+      options: ['Землю', 'Воду', 'Свет', 'Деревья'],
+      correct: 2,
+    },
+    {
+      question: 'Что Бог создал на четвёртый день?',
+      options: ['Рыб и птиц', 'Солнце, луну и звёзды', 'Животных', 'Человека'],
+      correct: 1,
+    },
+    {
+      question: 'Из чего Бог создал первого человека — Адама?',
+      options: ['Из воды', 'Из дерева', 'Из праха земного', 'Из камня'],
+      correct: 2,
+    },
+    {
+      question: 'Как назывался сад, в котором жил Адам?',
+      options: ['Рай', 'Эдем', 'Сион', 'Ханаан'],
+      correct: 1,
+    },
+    {
+      question: 'Кого Бог создал в помощь Адаму?',
+      options: ['Животных', 'Ангела', 'Еву', 'Другого человека'],
+      correct: 2,
+    },
+    {
+      question: 'Что Бог сделал на седьмой день?',
+      options: ['Создал человека', 'Почил (отдохнул)', 'Создал море', 'Создал небо'],
+      correct: 1,
+    },
+  ]
+
+  const handleAnswer = (questionIndex: number, optionIndex: number) => {
+    if (!submitted) {
+      setAnswers({ ...answers, [questionIndex]: optionIndex })
+    }
+  }
+
+  const handleSubmit = () => {
+    if (Object.keys(answers).length < questions.length) {
+      alert('Ответь на все вопросы! 😊')
+      return
+    }
+    setSubmitted(true)
+  }
+
+  const handleReset = () => {
+    setAnswers({})
+    setSubmitted(false)
+  }
+
+  const correctCount = questions.filter((q, i) => answers[i] === q.correct).length
+  const score = Math.round((correctCount / questions.length) * 100)
+
+  const getResultEmoji = () => {
+    if (score === 100) return '🏆'
+    if (score >= 70) return '🌟'
+    if (score >= 50) return '👍'
+    return '📖'
+  }
+
+  const getResultText = () => {
+    if (score === 100) return 'Отлично! Ты всё знаешь!'
+    if (score >= 70) return 'Молодец! Хороший результат!'
+    if (score >= 50) return 'Неплохо! Но можно лучше!'
+    return 'Пересмотри урок и попробуй снова!'
+  }
+
+  return (
+    <div className="my-10">
+      {/* Кнопка-заголовок для разворачивания */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full max-w-[700px] mx-auto flex items-center justify-between bg-white rounded-[15px] px-6 py-5 shadow-lg border-[3px] border-[#9C27B0] cursor-pointer transition-all duration-200 hover:shadow-xl hover:scale-[1.01]"
+      >
+        <div className="flex items-center gap-4 text-left">
+          <span className="text-4xl">📝</span>
+          <div>
+            <h3 className="text-lg md:text-xl font-bold text-gray-800">
+              Онлайн-тест по уроку
+            </h3>
+            <p className="text-sm text-gray-500">
+              Если нет возможности распечатать рабочую тетрадь
+            </p>
+          </div>
+        </div>
+        <span
+          className={`text-3xl text-[#9C27B0] transition-transform duration-300 ${
+            isOpen ? 'rotate-180' : ''
+          }`}
+        >
+          ▼
+        </span>
+      </button>
+
+      {/* Разворачивающийся контент */}
+      <div
+        className={`overflow-hidden transition-all duration-500 ease-in-out ${
+          isOpen ? 'max-h-[3000px] opacity-100 mt-4' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="max-w-[700px] mx-auto bg-white rounded-[20px] p-6 md:p-8 shadow-xl border-[3px] border-[#9C27B0]">
+          {!submitted ? (
+            <>
+              <h4 className="text-xl font-bold text-[#9C27B0] mb-6 text-center">
+                🎯 Проверь свои знания!
+              </h4>
+
+              <div className="space-y-6">
+                {questions.map((q, qIndex) => (
+                  <div
+                    key={qIndex}
+                    className={`rounded-xl p-4 border-2 transition-colors ${
+                      answers[qIndex] !== undefined
+                        ? 'border-[#9C27B0] bg-purple-50'
+                        : 'border-gray-200 bg-gray-50'
+                    }`}
+                  >
+                    <p className="font-bold text-gray-800 mb-3 text-left">
+                      <span className="text-[#9C27B0] mr-2">{qIndex + 1}.</span>
+                      {q.question}
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {q.options.map((option, oIndex) => (
+                        <label
+                          key={oIndex}
+                          className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all duration-200 ${
+                            answers[qIndex] === oIndex
+                              ? 'bg-[#9C27B0] text-white shadow-md'
+                              : 'bg-white hover:bg-purple-100 border border-gray-200'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name={`question-${qIndex}`}
+                            checked={answers[qIndex] === oIndex}
+                            onChange={() => handleAnswer(qIndex, oIndex)}
+                            className="sr-only"
+                          />
+                          <span
+                            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                              answers[qIndex] === oIndex
+                                ? 'border-white'
+                                : 'border-gray-400'
+                            }`}
+                          >
+                            {answers[qIndex] === oIndex && (
+                              <span className="w-2.5 h-2.5 rounded-full bg-white"></span>
+                            )}
+                          </span>
+                          <span className="text-sm font-medium">{option}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                className="mt-8 bg-[#9C27B0] hover:bg-[#7B1FA2] text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-200 hover:scale-105 shadow-lg"
+              >
+                ✅ Проверить ответы
+              </button>
+            </>
+          ) : (
+            /* Результат */
+            <div className="text-center py-6">
+              <div className="text-7xl mb-4">{getResultEmoji()}</div>
+              <h4 className="text-2xl font-bold text-gray-800 mb-2">
+                Твой результат: {correctCount} из {questions.length}
+              </h4>
+              <div className="text-4xl font-bold text-[#9C27B0] mb-3">{score}%</div>
+              <p className="text-lg text-gray-600 mb-6">{getResultText()}</p>
+
+              {/* Прогресс-бар */}
+              <div className="w-full max-w-md mx-auto bg-gray-200 rounded-full h-4 mb-8 overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-1000 ease-out"
+                  style={{
+                    width: `${score}%`,
+                    background:
+                      score >= 70
+                        ? 'linear-gradient(90deg, #4CAF50, #8BC34A)'
+                        : score >= 50
+                        ? 'linear-gradient(90deg, #FF9800, #FFC107)'
+                        : 'linear-gradient(90deg, #F44336, #FF5722)',
+                  }}
+                ></div>
+              </div>
+
+              {/* Показ правильных/неправильных ответов */}
+              <div className="text-left space-y-3 mb-8">
+                {questions.map((q, i) => (
+                  <div
+                    key={i}
+                    className={`flex items-start gap-3 p-3 rounded-lg ${
+                      answers[i] === q.correct
+                        ? 'bg-green-50 border border-green-200'
+                        : 'bg-red-50 border border-red-200'
+                    }`}
+                  >
+                    <span className="text-xl shrink-0">
+                      {answers[i] === q.correct ? '✅' : '❌'}
+                    </span>
+                    <div className="text-sm">
+                      <p className="font-bold text-gray-800">
+                        {i + 1}. {q.question}
+                      </p>
+                      {answers[i] !== q.correct && (
+                        <p className="text-green-700 mt-1">
+                          Правильный ответ: <strong>{q.options[q.correct]}</strong>
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={handleReset}
+                className="bg-[#FFD700] hover:bg-[#FFC107] text-gray-800 font-bold py-3 px-8 rounded-full text-base transition-all duration-200 hover:scale-105 shadow-lg"
+              >
+                🔄 Пройти тест ещё раз
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // Футер
 function Footer() {
   return (
@@ -201,6 +446,7 @@ export default function App() {
         <RibbonTitle text="Сотворение" />
         <VideoSection />
         <MaterialsSection />
+        <OnlineTest />
       </main>
 
       <Footer />
