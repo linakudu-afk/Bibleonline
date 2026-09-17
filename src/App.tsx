@@ -437,7 +437,7 @@ export default function App() {
       style={{
         backgroundImage: `
           linear-gradient(180deg, rgba(135,206,235,0.75) 0%, rgba(176,224,230,0.75) 50%, rgba(144,238,144,0.75) 100%),
-          url('https://image.qwenlm.ai/generated-images/52153886-6c81-4344-aa8f-9fdc814b3487/_result.png')
+          url('https://image.qwenlm.ai/generated-images/a8c92032-6fd1-4154-a8e2-bbac7bb104b4/_result.png')
         `,
         backgroundSize: 'cover',
         backgroundPosition: 'center top',
