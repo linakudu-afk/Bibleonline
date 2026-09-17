@@ -16,8 +16,8 @@ function Stars() {
       {stars.map((star, i) => (
         <span
           key={i}
-          className="absolute text-xl animate-pulse"
-          style={{ top: star.top, left: star.left, animationDelay: star.delay }}
+          className="absolute text-2xl animate-pulse opacity-60"
+          style={{ top: star.top, left: star.left, animationDelay: star.delay, animationDuration: '3s' }}
         >
           {star.emoji}
         </span>
@@ -32,11 +32,16 @@ function Header() {
   const links = ['Главная', 'Уроки', 'Истории', 'Игры', 'Контакты']
 
   return (
-    <header className="flex justify-between items-center px-6 md:px-10 py-4 bg-white/30 backdrop-blur-sm relative z-10">
-      <div className="text-2xl md:text-3xl font-bold text-[#FF6B35] [text-shadow:_2px_2px_0_#FFD700]">
-        BIBLE <span className="text-[#4169E1]">KIDS</span> ONLINE
+    <header className="flex justify-between items-center px-6 md:px-10 py-4 bg-white/40 backdrop-blur-md relative z-10 border-b border-white/20">
+      <div className="flex items-center gap-2">
+        <span className="text-3xl">📖</span>
+        <div className="text-2xl md:text-3xl font-black tracking-tight">
+          <span className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] bg-clip-text text-transparent">BIBLE</span>{' '}
+          <span className="bg-gradient-to-r from-[#4169E1] to-[#6B8DD6] bg-clip-text text-transparent">KIDS</span>{' '}
+          <span className="text-gray-700">ONLINE</span>
+        </div>
       </div>
-      <nav className="hidden md:flex gap-6">
+      <nav className="hidden md:flex gap-2">
         {links.map((link) => (
           <a
             key={link}
@@ -45,10 +50,10 @@ function Header() {
               e.preventDefault()
               setActiveLink(link)
             }}
-            className={`no-underline font-bold text-base uppercase transition-colors duration-300 hover:text-[#FF6B35] ${
+            className={`no-underline font-semibold text-sm px-4 py-2 rounded-full transition-all duration-300 ${
               activeLink === link
-                ? 'text-[#FF6B35] border-b-[3px] border-[#FF6B35]'
-                : 'text-gray-800'
+                ? 'bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] text-white shadow-lg shadow-orange-200/50 scale-105'
+                : 'text-gray-700 hover:bg-white/60 hover:shadow-md'
             }`}
           >
             {link}
@@ -56,7 +61,7 @@ function Header() {
         ))}
       </nav>
       {/* Мобильное меню */}
-      <button className="md:hidden text-2xl">☰</button>
+      <button className="md:hidden w-10 h-10 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center text-xl shadow-md">☰</button>
     </header>
   )
 }
@@ -65,13 +70,13 @@ function Header() {
 function RibbonTitle({ text }: { text: string }) {
   return (
     <div className="inline-block relative mb-8">
-      <div
-        className="bg-[#2E5090] text-white text-3xl md:text-5xl font-bold py-5 px-12 md:px-16 uppercase tracking-wider"
-        style={{
-          clipPath: 'polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%)',
-        }}
-      >
-        {text}
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#4169E1] to-[#6B8DD6] rounded-3xl blur-xl opacity-50"></div>
+        <div
+          className="relative bg-gradient-to-r from-[#2E5090] to-[#4A7BC8] text-white text-3xl md:text-5xl font-black py-5 px-12 md:px-16 uppercase tracking-wider rounded-3xl shadow-2xl"
+        >
+          <span className="relative z-10">{text}</span>
+        </div>
       </div>
     </div>
   )
@@ -147,48 +152,65 @@ function VideoSection() {
     <div className="my-8">
       {/* Название текущего слайда */}
       <div className="text-center mb-4">
-        <h3 className="text-2xl md:text-3xl font-bold text-[#2E5090] mb-2">
+        <h3 className="text-2xl md:text-3xl font-black text-gray-800 mb-2 drop-shadow-sm">
           {currentSlideData.title}
         </h3>
-        <p className="text-sm text-gray-600">
-          {currentSlide + 1} из {slides.length} слайдов
-        </p>
+        <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-1.5 shadow-md">
+          <div className="flex gap-1">
+            {Array.from({ length: slides.length }).map((_, i) => (
+              <div
+                key={i}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  i === currentSlide
+                    ? 'bg-[#4169E1] w-6'
+                    : 'bg-gray-300'
+                }`}
+              ></div>
+            ))}
+          </div>
+          <span className="text-xs font-semibold text-gray-600 ml-2">
+            {currentSlide + 1} / {slides.length}
+          </span>
+        </div>
       </div>
 
       <div className="flex items-center justify-center gap-4 md:gap-5 flex-wrap md:flex-nowrap">
         <button
           onClick={goToPrevious}
-          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-[#FFE082] to-[#FFB74D] text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 shrink-0 text-[#5D4037]"
+          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-[2rem] bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3 shrink-0 text-[#4169E1] group"
           style={{
-            boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
+            boxShadow: '0 10px 40px rgba(65, 105, 225, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1)',
           }}
           aria-label="Предыдущий слайд"
         >
-          ◀
+          <span className="transition-transform duration-300 group-hover:-translate-x-1">◀</span>
         </button>
 
-        <div className="w-full max-w-[720px] rounded-[20px] border-[6px] border-[#2E5090] overflow-hidden shadow-xl">
-          <iframe
-            key={currentSlideData.url}
-            width="100%"
-            height="405"
-            src={currentSlideData.url}
-            allow="clipboard-write; autoplay"
-            allowFullScreen
-            className="block"
-            style={{ aspectRatio: '16/9' }}
-          ></iframe>
+        <div className="relative w-full max-w-[720px]">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#4169E1] to-[#6B8DD6] rounded-3xl blur-xl opacity-40"></div>
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl ring-4 ring-white/50">
+            <iframe
+              key={currentSlideData.url}
+              width="100%"
+              height="405"
+              src={currentSlideData.url}
+              allow="clipboard-write; autoplay"
+              allowFullScreen
+              className="block"
+              style={{ aspectRatio: '16/9' }}
+            ></iframe>
+          </div>
         </div>
 
         <button
           onClick={goToNext}
-          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-[#FFE082] to-[#FFB74D] text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 shrink-0 text-[#5D4037]"
+          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-[2rem] bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-rotate-3 shrink-0 text-[#4169E1] group"
           style={{
-            boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
+            boxShadow: '0 10px 40px rgba(65, 105, 225, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1)',
           }}
           aria-label="Следующий слайд"
         >
-          ▶
+          <span className="transition-transform duration-300 group-hover:translate-x-1">▶</span>
         </button>
       </div>
     </div>
@@ -214,15 +236,16 @@ function MaterialCard({
   return (
     <div
       onClick={onClick}
-      className={`bg-white rounded-[20px] px-8 py-6 flex items-center gap-4 cursor-pointer transition-all duration-200 hover:-translate-y-1.5 hover:shadow-xl shadow-lg border-[3px] ${
-        type === 'notebook' ? 'border-[#4CAF50]' : 'border-[#FF6B35]'
-      }`}
+      className={`relative group bg-white/90 backdrop-blur-md rounded-3xl px-8 py-6 flex items-center gap-4 cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl shadow-xl overflow-hidden`}
     >
-      <div className="text-5xl">{icon}</div>
-      <div className="text-left">
-        <h3 className="text-base font-bold text-gray-800 mb-1">{title}</h3>
+      <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 ${
+        type === 'notebook' ? 'bg-gradient-to-br from-[#4CAF50] to-[#66BB6A]' : 'bg-gradient-to-br from-[#FF6B35] to-[#FF8C42]'
+      }`}></div>
+      <div className="relative text-5xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">{icon}</div>
+      <div className="relative text-left">
+        <h3 className="text-base font-bold text-gray-800 mb-2">{title}</h3>
         <span
-          className={`inline-block px-2 py-0.5 rounded-[5px] text-[11px] font-bold text-white ${formatColor}`}
+          className={`inline-block px-3 py-1 rounded-full text-xs font-bold text-white shadow-md ${formatColor}`}
         >
           {format}
         </span>
@@ -235,8 +258,11 @@ function MaterialCard({
 function MaterialsSection() {
   return (
     <div className="my-8">
-      <div className="inline-block bg-[#FFD700] text-gray-800 text-xl md:text-3xl font-bold py-4 px-8 md:px-10 rounded-[10px] uppercase shadow-lg mb-6">
-        Материалы для урока
+      <div className="inline-block relative mb-6">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FFD700] to-[#FFC107] rounded-2xl blur-lg opacity-60"></div>
+        <div className="relative bg-gradient-to-r from-[#FFD700] to-[#FFC107] text-gray-800 text-xl md:text-3xl font-black py-4 px-8 md:px-10 rounded-2xl shadow-xl">
+          📚 Материалы для урока
+        </div>
       </div>
 
       <div className="flex justify-center gap-6 md:gap-8 mt-5 flex-wrap">
@@ -245,7 +271,7 @@ function MaterialsSection() {
           title="Скачать рабочую тетрадь"
           icon="📓"
           format="PDF"
-          formatColor="bg-[#E53935]"
+          formatColor="bg-gradient-to-r from-[#E53935] to-[#EF5350]"
           onClick={() => alert('Скачиваем рабочую тетрадь!')}
         />
         <MaterialCard
@@ -253,7 +279,7 @@ function MaterialsSection() {
           title="Скачать презентацию"
           icon="📊"
           format="PPTX"
-          formatColor="bg-[#FF6B35]"
+          formatColor="bg-gradient-to-r from-[#FF6B35] to-[#FF8C42]"
           onClick={() => alert('Скачиваем презентацию!')}
         />
       </div>
@@ -346,10 +372,10 @@ function OnlineTest() {
       {/* Кнопка-заголовок для разворачивания */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full max-w-[700px] mx-auto flex items-center justify-between bg-white rounded-[15px] px-6 py-5 shadow-lg border-[3px] border-[#9C27B0] cursor-pointer transition-all duration-200 hover:shadow-xl hover:scale-[1.01]"
+        className="w-full max-w-[700px] mx-auto flex items-center justify-between bg-white/90 backdrop-blur-md rounded-3xl px-6 py-5 shadow-xl cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group"
       >
         <div className="flex items-center gap-4 text-left">
-          <span className="text-4xl">📝</span>
+          <span className="text-4xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">📝</span>
           <div>
             <h3 className="text-lg md:text-xl font-bold text-gray-800">
               Онлайн-тест по уроку
@@ -360,7 +386,7 @@ function OnlineTest() {
           </div>
         </div>
         <span
-          className={`text-3xl text-[#9C27B0] transition-transform duration-300 ${
+          className={`text-2xl text-[#9C27B0] transition-transform duration-300 ${
             isOpen ? 'rotate-180' : ''
           }`}
         >
@@ -374,10 +400,10 @@ function OnlineTest() {
           isOpen ? 'max-h-[3000px] opacity-100 mt-4' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="max-w-[700px] mx-auto bg-white rounded-[20px] p-6 md:p-8 shadow-xl border-[3px] border-[#9C27B0]">
+        <div className="max-w-[700px] mx-auto bg-white/95 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-2xl">
           {!submitted ? (
             <>
-              <h4 className="text-xl font-bold text-[#9C27B0] mb-6 text-center">
+              <h4 className="text-xl font-black text-[#9C27B0] mb-6 text-center">
                 🎯 Проверь свои знания!
               </h4>
 
@@ -433,7 +459,7 @@ function OnlineTest() {
 
               <button
                 onClick={handleSubmit}
-                className="mt-8 bg-[#9C27B0] hover:bg-[#7B1FA2] text-white font-bold py-4 px-10 rounded-full text-lg transition-all duration-200 hover:scale-105 shadow-lg"
+                className="mt-8 bg-gradient-to-r from-[#9C27B0] to-[#BA68C8] hover:from-[#7B1FA2] hover:to-[#9C27B0] text-white font-bold py-4 px-10 rounded-2xl text-lg transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl"
               >
                 ✅ Проверить ответы
               </button>
@@ -494,7 +520,7 @@ function OnlineTest() {
 
               <button
                 onClick={handleReset}
-                className="bg-[#FFD700] hover:bg-[#FFC107] text-gray-800 font-bold py-3 px-8 rounded-full text-base transition-all duration-200 hover:scale-105 shadow-lg"
+                className="bg-gradient-to-r from-[#FFD700] to-[#FFC107] hover:from-[#FFC107] hover:to-[#FFB300] text-gray-800 font-bold py-3 px-8 rounded-2xl text-base transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl"
               >
                 🔄 Пройти тест ещё раз
               </button>
@@ -509,8 +535,12 @@ function OnlineTest() {
 // Футер
 function Footer() {
   return (
-    <footer className="text-center py-6 text-gray-700 text-sm relative z-10">
-      <p>© 2024 Bible Kids Online — Учим Библию играя! 🙏</p>
+    <footer className="text-center py-8 relative z-10">
+      <div className="inline-block bg-white/60 backdrop-blur-md rounded-2xl px-8 py-4 shadow-lg">
+        <p className="text-gray-700 font-semibold text-sm">
+          © 2024 Bible Kids Online — Учим Библию играя! 🙏
+        </p>
+      </div>
     </footer>
   )
 }
@@ -527,7 +557,7 @@ export default function App() {
         backgroundSize: 'cover',
         backgroundPosition: 'center top',
         backgroundAttachment: 'fixed',
-        fontFamily: "'Comic Sans MS', Arial, sans-serif",
+        fontFamily: "'Nunito', 'Fredoka', sans-serif",
       }}
     >
       <Stars />
