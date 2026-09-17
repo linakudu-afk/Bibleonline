@@ -256,7 +256,7 @@ function MaterialsSection() {
         </div>
       </div>
 
-      <div className="flex justify-center gap-6 md:gap-8 mt-5 flex-wrap">
+      <div className="flex justify-center gap-10 md:gap-16 mt-5 flex-wrap">
         <MaterialCard
           type="notebook"
           title="Скачать рабочую тетрадь"
