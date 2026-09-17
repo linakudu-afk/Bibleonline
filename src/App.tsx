@@ -79,47 +79,79 @@ function RibbonTitle({ text }: { text: string }) {
 
 // Видео-секция
 function VideoSection() {
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  // Массив видео уроков
-  const videos = [
+  // Массив слайдов урока "Сотворение"
+  const slides = [
     {
-      title: 'Сотворение',
+      title: 'Слайд 1: Введение',
       url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
     },
     {
-      title: 'Адам и Ева',
-      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA', // Замените на реальный URL
+      title: 'Слайд 2: День первый',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
     },
     {
-      title: 'Ноев ковчег',
-      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA', // Замените на реальный URL
+      title: 'Слайд 3: День второй',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
     },
     {
-      title: 'Вавилонская башня',
-      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA', // Замените на реальный URL
+      title: 'Слайд 4: День третий',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
+    },
+    {
+      title: 'Слайд 5: День четвёртый',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
+    },
+    {
+      title: 'Слайд 6: День пятый',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
+    },
+    {
+      title: 'Слайд 7: День шестой',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
+    },
+    {
+      title: 'Слайд 8: День седьмой',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
+    },
+    {
+      title: 'Слайд 9: Адам и Ева',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
+    },
+    {
+      title: 'Слайд 10: Сад Эдемский',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
+    },
+    {
+      title: 'Слайд 11: Заключение',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
+    },
+    {
+      title: 'Слайд 12: Вопросы',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
     },
   ]
 
   const goToPrevious = () => {
-    setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
   }
 
   const goToNext = () => {
-    setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1))
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
   }
 
-  const currentVideo = videos[currentVideoIndex]
+  const currentSlideData = slides[currentSlide]
 
   return (
     <div className="my-8">
-      {/* Название текущего урока */}
+      {/* Название текущего слайда */}
       <div className="text-center mb-4">
         <h3 className="text-2xl md:text-3xl font-bold text-[#2E5090] mb-2">
-          Урок {currentVideoIndex + 1}: {currentVideo.title}
+          {currentSlideData.title}
         </h3>
         <p className="text-sm text-gray-600">
-          {currentVideoIndex + 1} из {videos.length} уроков
+          {currentSlide + 1} из {slides.length} слайдов
         </p>
       </div>
 
@@ -130,17 +162,17 @@ function VideoSection() {
           style={{
             boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
           }}
-          aria-label="Предыдущий урок"
+          aria-label="Предыдущий слайд"
         >
           ◀
         </button>
 
         <div className="w-full max-w-[720px] rounded-[20px] border-[6px] border-[#2E5090] overflow-hidden shadow-xl">
           <iframe
-            key={currentVideo.url}
+            key={currentSlideData.url}
             width="100%"
             height="405"
-            src={currentVideo.url}
+            src={currentSlideData.url}
             allow="clipboard-write; autoplay"
             allowFullScreen
             className="block"
@@ -154,7 +186,7 @@ function VideoSection() {
           style={{
             boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
           }}
-          aria-label="Следующий урок"
+          aria-label="Следующий слайд"
         >
           ▶
         </button>
