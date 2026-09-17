@@ -83,7 +83,7 @@ function VideoSection() {
     <div className="flex items-center justify-center gap-4 md:gap-5 my-8 flex-wrap md:flex-nowrap">
       <button
         onClick={() => alert('Предыдущий урок')}
-        className="w-16 h-16 md:w-[70px] md:h-[70px] rounded-full bg-[#FFD700] border-4 border-[#FFA500] text-3xl cursor-pointer flex items-center justify-center transition-transform duration-200 hover:scale-110 shadow-lg shrink-0"
+        className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#FFD700] border-4 border-[#FFA500] text-4xl md:text-5xl cursor-pointer flex items-center justify-center transition-transform duration-200 hover:scale-110 shadow-lg shrink-0"
       >
         ◀
       </button>
@@ -102,7 +102,7 @@ function VideoSection() {
 
       <button
         onClick={() => alert('Следующий урок')}
-        className="w-16 h-16 md:w-[70px] md:h-[70px] rounded-full bg-[#FFD700] border-4 border-[#FFA500] text-3xl cursor-pointer flex items-center justify-center transition-transform duration-200 hover:scale-110 shadow-lg shrink-0"
+        className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#FFD700] border-4 border-[#FFA500] text-4xl md:text-5xl cursor-pointer flex items-center justify-center transition-transform duration-200 hover:scale-110 shadow-lg shrink-0"
       >
         ▶
       </button>
