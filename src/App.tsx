@@ -83,7 +83,10 @@ function VideoSection() {
     <div className="flex items-center justify-center gap-4 md:gap-5 my-8 flex-wrap md:flex-nowrap">
       <button
         onClick={() => alert('Предыдущий урок')}
-        className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#FFD700] border-4 border-[#FFA500] text-4xl md:text-5xl cursor-pointer flex items-center justify-center transition-transform duration-200 hover:scale-110 shadow-lg shrink-0"
+        className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-[#FFE082] to-[#FFB74D] text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 shrink-0 text-[#5D4037]"
+        style={{
+          boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
+        }}
       >
         ◀
       </button>
@@ -102,7 +105,10 @@ function VideoSection() {
 
       <button
         onClick={() => alert('Следующий урок')}
-        className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#FFD700] border-4 border-[#FFA500] text-4xl md:text-5xl cursor-pointer flex items-center justify-center transition-transform duration-200 hover:scale-110 shadow-lg shrink-0"
+        className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-[#FFE082] to-[#FFB74D] text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 shrink-0 text-[#5D4037]"
+        style={{
+          boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
+        }}
       >
         ▶
       </button>
