@@ -435,7 +435,13 @@ export default function App() {
     <div
       className="min-h-screen overflow-x-hidden"
       style={{
-        background: 'linear-gradient(180deg, #87CEEB 0%, #B0E0E6 50%, #90EE90 100%)',
+        backgroundImage: `
+          linear-gradient(180deg, rgba(135,206,235,0.75) 0%, rgba(176,224,230,0.75) 50%, rgba(144,238,144,0.75) 100%),
+          url('https://image.qwenlm.ai/generated-images/52153886-6c81-4344-aa8f-9fdc814b3487/_result.png')
+        `,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
+        backgroundAttachment: 'fixed',
         fontFamily: "'Comic Sans MS', Arial, sans-serif",
       }}
     >
