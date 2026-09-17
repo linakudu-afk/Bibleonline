@@ -222,15 +222,11 @@ function MaterialCard({
   type,
   title,
   icon,
-  format,
-  formatColor,
   onClick,
 }: {
   type: 'notebook' | 'presentation'
   title: string
   icon: string
-  format: string
-  formatColor: string
   onClick: () => void
 }) {
   return (
@@ -243,12 +239,7 @@ function MaterialCard({
       }`}></div>
       <div className="relative text-5xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">{icon}</div>
       <div className="relative text-left">
-        <h3 className="text-base font-bold text-gray-800 mb-2">{title}</h3>
-        <span
-          className={`inline-block px-3 py-1 rounded-full text-xs font-bold text-white shadow-md ${formatColor}`}
-        >
-          {format}
-        </span>
+        <h3 className="text-base font-bold text-gray-800">{title}</h3>
       </div>
     </div>
   )
@@ -270,16 +261,12 @@ function MaterialsSection() {
           type="notebook"
           title="Скачать рабочую тетрадь"
           icon="📓"
-          format="PDF"
-          formatColor="bg-gradient-to-r from-[#E53935] to-[#EF5350]"
           onClick={() => alert('Скачиваем рабочую тетрадь!')}
         />
         <MaterialCard
           type="presentation"
           title="Скачать презентацию"
           icon="📊"
-          format="PPTX"
-          formatColor="bg-gradient-to-r from-[#FF6B35] to-[#FF8C42]"
           onClick={() => alert('Скачиваем презентацию!')}
         />
       </div>
