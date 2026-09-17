@@ -177,9 +177,9 @@ function VideoSection() {
       <div className="flex items-center justify-center gap-4 md:gap-5 flex-wrap md:flex-nowrap">
         <button
           onClick={goToPrevious}
-          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3 shrink-0 group overflow-hidden"
+          className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-3 shrink-0 group overflow-hidden"
           style={{
-            boxShadow: '0 10px 40px rgba(65, 105, 225, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 6px 20px rgba(65, 105, 225, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1)',
           }}
           aria-label="Предыдущий слайд"
         >
@@ -208,9 +208,9 @@ function VideoSection() {
 
         <button
           onClick={goToNext}
-          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-rotate-3 shrink-0 group overflow-hidden"
+          className="w-11 h-11 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-md cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-rotate-3 shrink-0 group overflow-hidden"
           style={{
-            boxShadow: '0 10px 40px rgba(65, 105, 225, 0.3), 0 4px 12px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 6px 20px rgba(65, 105, 225, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1)',
           }}
           aria-label="Следующий слайд"
         >
