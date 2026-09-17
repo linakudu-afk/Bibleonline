@@ -79,39 +79,86 @@ function RibbonTitle({ text }: { text: string }) {
 
 // Видео-секция
 function VideoSection() {
-  return (
-    <div className="flex items-center justify-center gap-4 md:gap-5 my-8 flex-wrap md:flex-nowrap">
-      <button
-        onClick={() => alert('Предыдущий урок')}
-        className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-[#FFE082] to-[#FFB74D] text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 shrink-0 text-[#5D4037]"
-        style={{
-          boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
-        }}
-      >
-        ◀
-      </button>
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
 
-      <div className="w-full max-w-[720px] rounded-[20px] border-[6px] border-[#2E5090] overflow-hidden shadow-xl">
-        <iframe
-          width="100%"
-          height="405"
-          src="https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA"
-          allow="clipboard-write; autoplay"
-          allowFullScreen
-          className="block"
-          style={{ aspectRatio: '16/9' }}
-        ></iframe>
+  // Массив видео уроков
+  const videos = [
+    {
+      title: 'Сотворение',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA',
+    },
+    {
+      title: 'Адам и Ева',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA', // Замените на реальный URL
+    },
+    {
+      title: 'Ноев ковчег',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA', // Замените на реальный URL
+    },
+    {
+      title: 'Вавилонская башня',
+      url: 'https://rutube.ru/play/embed/3f85e322e17d63129d881b2212f5affe/?p=IgIuTGiTOhqD2z_9q5-swA', // Замените на реальный URL
+    },
+  ]
+
+  const goToPrevious = () => {
+    setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
+  }
+
+  const goToNext = () => {
+    setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1))
+  }
+
+  const currentVideo = videos[currentVideoIndex]
+
+  return (
+    <div className="my-8">
+      {/* Название текущего урока */}
+      <div className="text-center mb-4">
+        <h3 className="text-2xl md:text-3xl font-bold text-[#2E5090] mb-2">
+          Урок {currentVideoIndex + 1}: {currentVideo.title}
+        </h3>
+        <p className="text-sm text-gray-600">
+          {currentVideoIndex + 1} из {videos.length} уроков
+        </p>
       </div>
 
-      <button
-        onClick={() => alert('Следующий урок')}
-        className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-[#FFE082] to-[#FFB74D] text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 shrink-0 text-[#5D4037]"
-        style={{
-          boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
-        }}
-      >
-        ▶
-      </button>
+      <div className="flex items-center justify-center gap-4 md:gap-5 flex-wrap md:flex-nowrap">
+        <button
+          onClick={goToPrevious}
+          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-[#FFE082] to-[#FFB74D] text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 shrink-0 text-[#5D4037]"
+          style={{
+            boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
+          }}
+          aria-label="Предыдущий урок"
+        >
+          ◀
+        </button>
+
+        <div className="w-full max-w-[720px] rounded-[20px] border-[6px] border-[#2E5090] overflow-hidden shadow-xl">
+          <iframe
+            key={currentVideo.url}
+            width="100%"
+            height="405"
+            src={currentVideo.url}
+            allow="clipboard-write; autoplay"
+            allowFullScreen
+            className="block"
+            style={{ aspectRatio: '16/9' }}
+          ></iframe>
+        </div>
+
+        <button
+          onClick={goToNext}
+          className="w-32 h-32 md:w-[135px] md:h-[135px] rounded-full bg-gradient-to-br from-[#FFE082] to-[#FFB74D] text-5xl md:text-6xl cursor-pointer flex items-center justify-center transition-all duration-300 hover:scale-110 shrink-0 text-[#5D4037]"
+          style={{
+            boxShadow: '0 8px 32px rgba(255, 183, 77, 0.5), 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px rgba(255, 255, 255, 0.6)',
+          }}
+          aria-label="Следующий урок"
+        >
+          ▶
+        </button>
+      </div>
     </div>
   )
 }
